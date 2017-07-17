@@ -1384,6 +1384,7 @@ int adventurerCall(struct gameState *state)
 //refactored smithy card
 int smithyCall(struct gameState *state, int handPos)
 {
+  int i;
   int currentPlayer = whoseTurn(state);
   int nextPlayer = currentPlayer + 1;
   //+3 Cards

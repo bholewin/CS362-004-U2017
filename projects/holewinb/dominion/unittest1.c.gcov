@@ -1,0 +1,43 @@
+        -:    0:Source:unittest1.c
+        -:    0:Graph:unittest1.gcno
+        -:    0:Data:unittest1.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/*
+        -:    2:Bryce Holewinski
+        -:    3:CS362, Section 400
+        -:    4:This is part of the unit tests suites
+        -:    5:It will test a particular function in
+        -:    6:dominion.c. Formatting based on suppltTest.c
+        -:    7:*/
+        -:    8:
+        -:    9:#include "dominion.h"
+        -:   10:#include "dominion_helpers.h"
+        -:   11:#include <string.h>
+        -:   12:#include <stdio.h>
+        -:   13:#include <assert.h>
+        -:   14:#include "rngs.h"
+        -:   15:#include "assertTrue.h"
+        -:   16:
+        -:   17:int main () {
+        -:   18:
+        -:   19:  int r;
+        -:   20:  int t; // testing variable
+        -:   21:
+        1:   22:  int k[10] = {adventurer, council_room, feast, gardens, mine,
+        -:   23:	       remodel, smithy, village, baron, great_hall};
+        -:   24:
+        -:   25:  struct gameState G;
+        -:   26:
+        1:   27:  r = initializeGame(2, k, 1, &G);
+        1:   28:  printf("*************************************************\n");
+        1:   29:  printf("This test will check the whoseTurn function.\n");
+        1:   30:  t = whoseTurn(&G);
+        1:   31:  assertTrue(t == G.whoseTurn, "Initial turn matching\n");
+        1:   32:  printf("Checking for next player turn is proper.\n");
+        1:   33:  endTurn(&G);
+        1:   34:  t = whoseTurn(&G);
+        1:   35:  assertTrue(t == G.whoseTurn, "Matches up after ending turn.\n");
+        1:   36:  printf("*************************************************\n");
+        1:   37:  return 0;
+        -:   38:}

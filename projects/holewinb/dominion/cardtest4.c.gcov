@@ -1,0 +1,59 @@
+        -:    0:Source:cardtest4.c
+        -:    0:Graph:cardtest4.gcno
+        -:    0:Data:cardtest4.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/*
+        -:    2:Bryce Holewinski
+        -:    3:CS362, Section 400
+        -:    4:This is part of the unit tests suites
+        -:    5:It will test a particular card in
+        -:    6:dominion.c. Formatting based on suppltTest.c
+        -:    7:*/
+        -:    8:
+        -:    9:#include "dominion.h"
+        -:   10:#include "dominion_helpers.h"
+        -:   11:#include <string.h>
+        -:   12:#include <stdio.h>
+        -:   13:#include <assert.h>
+        -:   14:#include "rngs.h"
+        -:   15:#include "assertTrue.h"
+        -:   16:
+        -:   17:int main () {
+        -:   18:
+        -:   19:  int r, s;
+        -:   20:  int t; // testing variable
+        -:   21:  char buffer[1024];
+        1:   22:  int k[10] = {adventurer, council_room, feast, gardens, mine,
+        -:   23:	       remodel, smithy, village, baron, great_hall};
+        -:   24:
+        -:   25:  struct gameState OG; //original state
+        -:   26:  struct gameState currentG; //for comparison
+        -:   27:
+        1:   28:  r = initializeGame(2, k, 1, &OG);
+        1:   29:  s = initializeGame(2, k, 1, &currentG);
+        1:   30:  printf("*************************************************\n");
+        1:   31:  printf("This test will check the great_hall card. (Expect to find bugs)\n");
+        1:   32:  greatHallCall(&currentG, 0);
+        1:   33:  assertTrue(OG.handCount[0] == currentG.handCount[0], "Player gains a card and discards their great_hall card.");
+        1:   34:  assertTrue(OG.deckCount[0] - 1 == currentG.deckCount[0], "The deck should have 1 less card.");
+        -:   35:
+        1:   36:  printf("Check to make sure the player has additional actions.\n");
+        1:   37:  assertTrue(OG.numActions + 1 == currentG.numActions, "Player gained one action.");
+        -:   38:
+        1:   39:  assertTrue(OG.handCount[1] == currentG.handCount[1], "Player 2's hand count is not modified.");
+        1:   40:  assertTrue(OG.deckCount[1] == currentG.deckCount[1], "Player 2's deck is not modified.");
+        -:   41:
+        1:   42:  printf("Check to make sure the player has less coins.\n");
+        1:   43:  assertTrue(OG.coins - 3 == currentG.coins, "Coin amount was properly calculated.");
+        -:   44:
+        1:   45:  printf("Check to make sure the treasure cards are not altered.\n");
+       56:   46:  for (t = 0; t < treasure_map+1; t++)
+        -:   47:  {
+       27:   48:    sprintf(buffer, "Propper number of treasure card %d.\n", t);
+       27:   49:    assertTrue(OG.supplyCount[t] == currentG.supplyCount[t], buffer);
+       27:   50:  }
+        -:   51:
+        1:   52:  printf("*************************************************\n");
+        1:   53:  return 0;
+        -:   54:}
