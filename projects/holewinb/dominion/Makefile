@@ -91,12 +91,45 @@ unittestresult.out: dominion.o assertTrue.o rngs.o unittest1.c unittest2.c unitt
 	gcc -o cardtest4 -g cardtest4.c dominion.o rngs.o assertTrue.o $(CFLAGS)
 	cardtest4 >> unittestresult.out
 	gcov dominion.c >> unittestresult.out
-	
+
 
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
 
+randomtestadventurer: randomtestadventurer.c dominion.o rngs.o assertTrue.o
+	gcc -o randomtestadventurer -g randomtestadventurer.c dominion.o rngs.o assertTrue.o $(CFLAGS)
+
+randomtestadventurer.out: randomtestadventurer.c dominion.o rngs.o assertTrue.o
+	echo "randomtestadventurer.c:" > randomtestadventurer.out
+	gcc -o randomtestadventurer -g randomtestadventurer.c dominion.o rngs.o assertTrue.o $(CFLAGS)
+	randomtestadventurer >> randomtestadventurer.out
+	gcov -b dominion.c >> randomtestadventurer.out
+	echo "dominion.c.gcov:" >> randomtestadventurer.out
+	cat dominion.c.gcov >> randomtestadventurer.out
+
+randomtestcard1: randomtestcard1.c dominion.o rngs.o assertTrue.o
+	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o assertTrue.o $(CFLAGS)
+
+randomtestcard1.out: randomtestcard1.c dominion.o rngs.o assertTrue.o
+	echo "randomtestcard1.c:" > randomtestcard1.out
+	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o assertTrue.o $(CFLAGS)
+	randomtestcard1 >> randomtestcard1.out
+	gcov -b dominion.c >> randomtestcard1.out
+	echo "dominion.c.gcov:" >> randomtestcard1.out
+	cat dominion.c.gcov >> randomtestcard1.out
+
+randomtestcard2: randomtestcard2.c dominion.o rngs.o assertTrue.o
+	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o assertTrue.o $(CFLAGS)
+
+randomtestcard2.out: randomtestcard2.c dominion.o rngs.o assertTrue.o
+	echo "randomtestcard2.c:" > randomtestcard2.out
+	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o assertTrue.o $(CFLAGS)
+	randomtestcard2 >> randomtestcard2.out
+	gcov -b dominion.c >> randomtestcard2.out
+	echo "dominion.c.gcov:" >> randomtestcard2.out
+	cat dominion.c.gcov >> randomtestcard2.out
+
 all: playdom player unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4
 
 clean:
-	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe unittest1 unittest2 unittest3 unittest4 cardtest1 cardtest2 cardtest3 cardtest4 randomtestadventurer randomtestcard1 randomtestcard2
