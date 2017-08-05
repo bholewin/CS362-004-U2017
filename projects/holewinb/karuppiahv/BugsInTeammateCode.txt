@@ -1,0 +1,14 @@
+Card          Bug Found
+-------------------------------------------------------------------------------
+Smithy        Smithy card draws 4 cards into the player's hand from the deck
+              rather than 3 as originally designed.
+-------------------------------------------------------------------------------
+Adventurer    The Adventurer card never draws additional treasure cards. The
+              Adventurer card is supposed to be able to pull cards from the deck
+              until the player has two additional treasure cards in their hand.
+              However, this does not appear to ever happen.
+-------------------------------------------------------------------------------
+village       The village card's bug is that it adds far more actions to the
+              player than originally designed. It's supposed to only add two
+              actions but this bug adds twelve.
+-------------------------------------------------------------------------------
